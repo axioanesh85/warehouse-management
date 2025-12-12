@@ -1,13 +1,11 @@
 services:
   - type: web
     name: warehouse-management
-    runtime: python
+    runtime: docker
+    region: oregon  # or singapore, ohio, frankfurt
     plan: free
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      alembic upgrade head
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -27,3 +25,4 @@ databases:
     plan: free
     databaseName: warehouse_db
     user: warehouse_user
+    region: oregon
