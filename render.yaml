@@ -2,7 +2,7 @@ services:
   - type: web
     name: warehouse-management
     runtime: docker
-    region: oregon  # or singapore, ohio, frankfurt
+    region: oregon
     plan: free
     dockerfilePath: ./Dockerfile
     dockerContext: .
@@ -19,6 +19,8 @@ services:
         value: 8000
       - key: REGISTRATION_OPEN
         value: "false"
+      - key: ALLOWED_ORIGINS
+        value: "*"
 
 databases:
   - name: warehouse-db
